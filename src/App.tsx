@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import styled from 'styled-components'
+import 'antd/dist/antd.css'
+import { Row, Col } from 'antd'
+import { NavBarContainer } from './component/navbar/navbarContainer';
+import { UsersContainer } from './component/users/usersInfo/usersInfoContainer';
+import { UsersProfileContainer } from './component/users/userProfile/userProfileContainer';
 
-function App() {
+const AppWrapper = styled.div`
+width: 665px;
+font-size: 12px;
+line-height: 14px;
+`
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AppWrapper>
+        <Row>
+          <Col span={18} push={6}>
+            <Routes>
+              <Route path="/" element={<UsersContainer />} />
+              <Route path="/:id" element={<UsersProfileContainer/>} />
+            </Routes>
+          </Col>
+          <Col span={6} pull={18}>
+            <NavBarContainer />
+          </Col>
+        </Row>
+      </AppWrapper>
+    </BrowserRouter>
+
   );
 }
 
-export default App;
